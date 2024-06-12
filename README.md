@@ -6,17 +6,16 @@
 
 <h2>Usage</h2>
 <p>Run the script with the following command:</p>
-<pre><code>python inputprobe.py &lt;url&gt; [--recursive] [-o OUTPUT_FILE] [-u USER_AGENT] [-t THREADS]</code></pre>
+<pre><code>python inputprobe.py &lt;url&gt; [--recursive] [-o OUTPUT_FILE] [-u USER_AGENT]</code></pre>
     <ul>
         <li><code>&lt;url&gt;</code>: The URL to start with.</li>
         <li><code>--recursive</code>: (Optional) Enable recursive URL grabbing.</li>
         <li><code>-o OUTPUT_FILE</code>: (Optional) Specify an output file to write input fields.</li>
         <li><code>-u USER_AGENT</code>: (Optional) Specify a custom user agent.</li>
-        <li><code>-t THREADS</code>: (Optional) Specify the number of threads to use (default: 5).</li>
     </ul>
 <p>For example:</p>
-<pre><code>python inputprobe.py https://example.com --recursive -o output.txt -u "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -t 10</code></pre>
-<p>This will fetch URLs from the given webpage recursively, display input fields found within those URLs, and write the input fields to the specified output file if provided. It will also use 10 threads for concurrent URL fetching.</p>
+<pre><code>python inputprobe.py https://example.com --recursive -o output.txt -u "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"</code></pre>
+<p>This will fetch URLs from the given webpage recursively, display input fields found within those URLs, and write the input fields to the specified output file if provided.</p>
 <br>
 <h2>🛠️ Installation Steps:</h2>
 
