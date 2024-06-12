@@ -33,21 +33,30 @@ def extractUrls(html, base_url):
         urls.append(full_url)
     return urls
 
-def checkInputFields(html, url, output_file=None):
+def checkInputFields(html, url, unique_inputs, output_file=None):
     soup = BeautifulSoup(html, 'html.parser')
     input_fields = soup.find_all('input')
-    if input_fields:
+    new_input_fields = set()
+    
+    for input_field in input_fields:
+        input_str = str(input_field)
+        if input_str not in unique_inputs:
+            unique_inputs.add(input_str)
+            new_input_fields.add(input_str)
+    
+    if new_input_fields:
         print(f"\nURL: {url}")
-        for input_field in input_fields:
+        for input_field in new_input_fields:
             print(input_field)
         print("-" * 50)
+        
         if output_file:
             try:
                 with open(output_file, 'a', encoding='utf-8') as f:
                     f.write(f"\nURL: {url}\n")
                     f.write("-" * 50 + "\n")
-                    for input_field in input_fields:
-                        f.write(str(input_field) + "\n")
+                    for input_field in new_input_fields:
+                        f.write(input_field + "\n")
             except Exception as e:
                 print(f"Can't write {output_file}: {e}")
 
@@ -60,6 +69,7 @@ def main():
     
     visited_urls = set()
     urls_to_visit = [args.url]
+    unique_inputs = set()
     
     print("-" * 50)
     while urls_to_visit:
@@ -68,7 +78,7 @@ def main():
         
         htmlContent = fetchHtml(url, args.user_agent)
         if htmlContent:
-            checkInputFields(htmlContent, url, args.output)
+            checkInputFields(htmlContent, url, unique_inputs, args.output)
             
             if args.recursive:
                 new_urls = extractUrls(htmlContent, url)
